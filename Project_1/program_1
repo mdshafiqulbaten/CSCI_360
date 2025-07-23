@@ -1,0 +1,58 @@
+#include <iostream>
+#include <map>
+#include <vector>
+#include <iomanip>
+#include <algorithm>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string ciphertext = R"(lrvmnir bpr sumvbwvr jx bpr lmiwv yjeryrkbi jx qmbm wi 
+bpr xjvni mkd ymibrut jx irhx wi bpr riirkvr jx 
+ymbinlmtmipw utn qmumbr dj w ipmhh but bj rhnvwdmbr bpr 
+yjeryrkbi jx bpr qmbm mvvjudwko bj yt wkbrusurbmbwjk 
+lmird jk xjubt trmui jx ibndt 
+wb wi kjb mk rmit bmiq bj rashmwk rmvp yjeryrkb mkd wbi 
+iwokwxwvmkvr mkd ijyr ynib urymwk nkrashmwkrd bj ower m 
+vjyshrbr rashmkmbwjk jkr cjnhd pmer bj lr fnmhwxwrd mkd 
+wkiswurd bj invp mk rabrkb bpmb pr vjnhd urmvp bpr ibmbr 
+jx rkhwopbrkrd ywkd vmsmlhr jx urvjokwgwko ijnkdhrii 
+ijnkd mkd ipmsrhrii ipmsr w dj kjb drry ytirhx bpr xwkmh 
+mnbpjuwbt lnb yt rasruwrkvr cwbp qmbm pmi hrxb kj djnlb 
+bpmb bpr xjhhjcwko wi bpr sujsru msshwvmbwjk mkd 
+wkbrusurbmbwjk w jxxru yt bprjuwri wk bpr pjsr bpmb bpr 
+riirkvr jx jqwkmcmk qmumbr cwhh urymwk wkbmvb )";
+
+    map<char, int> frequency;
+    int total_letters = 0;
+
+    
+    for (char ch : ciphertext) {
+        if (isalpha(ch)) {
+            char upper = toupper(ch); 
+            frequency[upper]++;
+            total_letters++;
+        }
+    }
+
+    
+    vector<pair<char, double>> sorted_freq;
+    for (auto &p : frequency) {
+        double relative = (static_cast<double>(p.second) / total_letters) * 100.0;
+        sorted_freq.push_back({p.first, relative});
+    }
+
+    sort(sorted_freq.begin(), sorted_freq.end(), [](auto &a, auto &b) {
+        return a.second > b.second;
+    });
+
+   
+    cout << fixed << setprecision(2);
+    cout << "Letter | Frequency (%)\n";
+    cout << "----------------------\n";
+    for (auto &[letter, freq] : sorted_freq) {
+        cout << "   " << letter << "   |    " << freq << "%" << endl;
+    }
+
+    return 0;
+}
