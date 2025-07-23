@@ -1,0 +1,41 @@
+#include <iostream>
+#include <map>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string ciphertext = R"(lrvmnir bpr sumvbwvr jx bpr lmiwv yjeryrkbi jx qmbm wi 
+bpr xjvni mkd ymibrut jx irhx wi bpr riirkvr jx 
+ymbinlmtmipw utn qmumbr dj w ipmhh but bj rhnvwdmbr bpr 
+yjeryrkbi jx bpr qmbm mvvjudwko bj yt wkbrusurbmbwjk 
+lmird jk xjubt trmui jx ibndt 
+wb wi kjb mk rmit bmiq bj rashmwk rmvp yjeryrkb mkd wbi 
+iwokwxwvmkvr mkd ijyr ynib urymwk nkrashmwkrd bj ower m 
+vjyshrbr rashmkmbwjk jkr cjnhd pmer bj lr fnmhwxwrd mkd 
+wkiswurd bj invp mk rabrkb bpmb pr vjnhd urmvp bpr ibmbr 
+jx rkhwopbrkrd ywkd vmsmlhr jx urvjokwgwko ijnkdhrii 
+ijnkd mkd ipmsrhrii ipmsr w dj kjb drry ytirhx bpr xwkmh 
+mnbpjuwbt lnb yt rasruwrkvr cwbp qmbm pmi hrxb kj djnlb 
+bpmb bpr xjhhjcwko wi bpr sujsru msshwvmbwjk mkd 
+wkbrusurbmbwjk w jxxru yt bprjuwri wk bpr pjsr bpmb bpr 
+riirkvr jx jqwkmcmk qmumbr cwhh urymwk wkbmvb )";
+
+    map<char, char> substitution = {
+        {'B', 'E'}, {'P', 'H'}, {'R', 'T'}, {'J', 'O'}, {'M', 'N'},
+        {'K', 'A'}, {'W', 'S'}, {'I', 'R'}, {'V', 'D'}, {'Y', 'L'},
+        {'L', 'C'}, {'X', 'U'}, {'N', 'M'}, {'U', 'G'}, {'D', 'Y'},
+        {'Q', 'B'}, {'S', 'W'}, {'T', 'F'}, {'H', 'K'}, {'O', 'P'},
+        {'C', 'V'}, {'A', 'Z'}, {'E', 'X'}, {'Z', 'Q'}, {'G', 'J'}
+    };
+
+    for (char c : ciphertext) {
+        if (isalpha(c)) {
+            char upper = toupper(c);
+            cout << substitution[upper];
+        } else {
+            cout << c;
+        }
+    }
+
+    return 0;
+}
